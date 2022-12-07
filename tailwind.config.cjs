@@ -44,7 +44,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         'hero-pattern': "url('/src/assets/Imagem.png')",
-        'main-texture': "url('./src/assets/Background.png')",
+        'main-texture': "url('/img/Background.png')",
       },
     },
   },

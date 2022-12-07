@@ -3,7 +3,7 @@ import { Header } from '../components/Header'
 
 export function DefaultLayout() {
   return (
-    <div className="">
+    <div className=" md:px-40">
       <Header />
 
       <Outlet />

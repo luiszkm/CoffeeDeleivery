@@ -1,12 +1,9 @@
 import { Button } from '../components/Button'
-
+import { Hero } from '../components/Hero'
 export function Home() {
   return (
     <div>
-      <main className="flex bg-main-texture ">
-        <div></div>
-        <img src="" alt="copo grande de café com um funo amarelo" />
-      </main>
+      <Hero />
       <Button />
     </div>
   )

@@ -3,9 +3,9 @@ import { MapPin } from 'phosphor-react'
 
 export function Header() {
   return (
-    <header className="flex items-center justify-between px-40 py-8">
+    <header className="flex items-center justify-between px-4 py-8">
       <img
-        src="/logo.svg"
+        src="/img/logo.svg"
         alt="copo de cafe roxo escrito coffee delivery ao lado"
       />
       <div className="flex items-center gap-3">
