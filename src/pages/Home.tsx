@@ -1,10 +1,13 @@
-import { Button } from '../components/Button'
+import { Card } from '../components/Card'
 import { Hero } from '../components/Hero'
 export function Home() {
   return (
     <div>
       <Hero />
-      <Button />
+      <Card />
+      <section>
+        <h2>Nossos cafés</h2>
+      </section>
     </div>
   )
 }
