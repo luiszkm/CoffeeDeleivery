@@ -13,7 +13,7 @@ export function Hero() {
             hora
           </span>
         </div>
-        <div className="grid gap-3 md:grid-cols-2">
+        <div className="grid gap-3 sm:grid-cols-2">
           <span className="flex items-center gap-3">
             <span className="w-8 h-8 rounded-full flex items-center justify-center bg-yellow-dark">
               <ShoppingCart size={16} />
@@ -41,7 +41,7 @@ export function Hero() {
         </div>
       </div>
       <img
-        className="max-w-md"
+        className="max-w-sm mx-auto my-0"
         src="/img/Imagem.png"
         alt="copo grande de café com um funo amarelo"
       />

@@ -20,6 +20,7 @@ module.exports = {
     colors: {
       wite: '#FFFFFF',
       background: '#FAFAFA',
+      transparent: 'transparent',
       base: {
         title: '#272221',
         subTitle: '#403937',
@@ -40,6 +41,16 @@ module.exports = {
         normal: '#8047F8',
         light: '#EBE5F9',
       },
+    },
+    screens: {
+      sm: '664px',
+      // => @media (min-width: 576px) { ... }
+
+      md: '960px',
+      // => @media (min-width: 960px) { ... }
+
+      lg: '1280px',
+      // => @media (min-width: 1440px) { ... }
     },
     extend: {
       backgroundImage: {
