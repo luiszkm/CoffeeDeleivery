@@ -14,8 +14,6 @@ export function PurchaseButton({amountProduct, changeAmountProduct, addProduct}:
   const isMinusOne = amountProduct == 1
 
 
- 
-
   return (
     <div>
       <span className="text-2xl text-base-text font-bold font-mono ">

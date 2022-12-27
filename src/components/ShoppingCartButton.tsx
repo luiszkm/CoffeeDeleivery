@@ -9,7 +9,6 @@ interface ShoppingCartProps extends ButtonHTMLAttributes < HTMLButtonElement > {
 export function ShoppingCartButton({ primary = false, ...rest}: ShoppingCartProps) {
   const { products } = useShopCar()
 
-  console.log(products.length);
   
   return (
     <button {...rest}
