@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { TabCard } from '../../components/TabCard'
 import { PurchaseForm } from './components/PurchaseForm'
 import { useForm, FormProvider } from 'react-hook-form'
+import { PaymentMethod } from './components/PaymentMethod';
 
 interface ClientAddress {
   id: string;
@@ -14,7 +15,7 @@ interface ClientAddress {
 
 export function Checkout() {
   const clientAddressForm = useForm<ClientAddress>()
-  const {  handleSubmit, reset } = clientAddressForm
+  const { handleSubmit, reset } = clientAddressForm
 
 
   const [amountProduct, setAmountProduct] = useState(1)
@@ -24,17 +25,20 @@ export function Checkout() {
 
 
   return (
-    <div>
+    <div className="flex flex-col items-center gap-8 md:flex-row">
       <section>
-        <h2>Complete seu pedido</h2>
-        <form action="">
+        <h2 className="text-lg font-bold mb-4">Complete seu pedido</h2>
+        <form action=""
+        className="flex flex-col items-center gap-3 w-full max-w-[640px]"
+        >
           <FormProvider {...clientAddressForm}>
             <PurchaseForm />
+            <PaymentMethod />
           </FormProvider>
         </form>
       </section>
       <section>
-        <h2>Cafés selecionados</h2>
+        <h2 className="text-lg font-bold mb-4">Cafés selecionados</h2>
 
         <div className='bg-base-card rounded-tr-[36px] rounded-bl-[36px] rounded-md flex flex-col items-center gap-6 p-10 max-w-md'>
           <TabCard
