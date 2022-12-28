@@ -1,8 +1,21 @@
 import { useState } from 'react'
-import { Input } from '../../components/Input'
 import { TabCard } from '../../components/TabCard'
 import { PurchaseForm } from './components/PurchaseForm'
+import { useForm, FormProvider } from 'react-hook-form'
+
+interface ClientAddress {
+  id: string;
+  task: string
+  amountMinutes: number
+  startDate: Date
+  interruptedDate?: Date
+  finishedDate?: Date
+}
+
 export function Checkout() {
+  const clientAddressForm = useForm<ClientAddress>()
+  const {  handleSubmit, reset } = clientAddressForm
+
 
   const [amountProduct, setAmountProduct] = useState(1)
   function handleAmountProduct(amount: number) {
@@ -15,7 +28,9 @@ export function Checkout() {
       <section>
         <h2>Complete seu pedido</h2>
         <form action="">
-          <PurchaseForm />
+          <FormProvider {...clientAddressForm}>
+            <PurchaseForm />
+          </FormProvider>
         </form>
       </section>
       <section>
