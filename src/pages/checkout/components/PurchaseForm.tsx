@@ -2,7 +2,6 @@ import { useFormContext } from "react-hook-form";
 import { Input } from "../../../components/Input";
 import { MapPinLine } from "phosphor-react";
 
-
 export function PurchaseForm() {
   const { register } = useFormContext()
   return (
@@ -18,21 +17,21 @@ export function PurchaseForm() {
         </span>
       </div>
 
-      <Input placeholder="CEP" id="cep" primary {...register('cep',{ required: true })} />
-      <Input placeholder="Rua" id="street"  {...register('street',{ required: true })} />
+      <Input placeholder="CEP" id="cep" primary />
+      <Input placeholder="Rua" id="street" />
 
       <div className="flex flex-col items-start gap-4 w-full sm:flex-row sm:items-center ">
-        <Input placeholder="Número" id="number" primary {...register('number',{ required: true })} />
-        <Input placeholder="Complemento" id="complement"  {...register('complement')} />
+        <Input placeholder="Número" id="number" primary />
+        <Input placeholder="Complemento" id="complement" required={false} />
 
       </div>
       <div className="flex flex-col justify-between items-start gap-4 w-full sm:flex-row sm:items-center  ">
-        <Input placeholder="Bairro" id="district" primary {...register('district',{ required: true })} />
-        <Input placeholder="Cidade" id="city"  {...register('city',{ required: true })} />
-        <Input placeholder="UF" id="state" secondary  {...register('state',{ required: true })} />
+        <Input placeholder="Bairro" id="district" primary />
+        <Input placeholder="Cidade" id="city" />
+        <Input placeholder="UF" id="state" secondary />
       </div>
 
-     
+
     </div>
   )
 

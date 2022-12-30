@@ -15,33 +15,33 @@ export function PaymentMethod() {
         </span>
       </div>
 
-      <div className="flex items-center flex-col gap-3 text-xs w-full sm:flex-row ">
+      <div className="flex items-center flex-col gap-3 text-2xs w-full sm:flex-row ">
 
-        <label className="flex items-center gap-3 bg-base-button p-4 uppercase rounded-md cursor-pointer focus-within:border-[1px]  focus-within:bg-purple-light focus-within:border-purple-normal w-full hover:animate-bounce "
+        <label className="flex items-center gap-3 bg-base-button py-4 px-2 uppercase rounded-md cursor-pointer focus-within:border-[1px]  focus-within:bg-purple-light focus-within:border-purple-normal w-full hover:animate-bounce "
           htmlFor="creditCard">
           <CreditCard size={16} color="#8047F8" /> Cartão de crédito
           <input className="w-[1px] h-[1px] border-0 -m-[1px] opacity-0 absolute"
             id="creditCard"
-            {...register("payment",
+            {...register("paymentMethod",
               { required: true })}
             type="radio"
-            value="creditCard" />
+            value="credit" />
         </label>
-        <label className="flex items-center gap-3 bg-base-button p-4 uppercase rounded-md cursor-pointer focus-within:border-[1px]  focus-within:bg-purple-light focus-within:border-purple-normal w-full hover:animate-bounce"
+        <label className="flex items-center gap-3 bg-base-button py-4 px-2 uppercase rounded-md cursor-pointer focus-within:border-[1px]  focus-within:bg-purple-light focus-within:border-purple-normal w-full hover:animate-bounce"
           htmlFor="debitCard">
           <CreditCard size={16} color="#8047F8" /> Cartão de débito
 
           <input id="debitCard" className="w-[1px] h-[1px] border-0 -m-[1px] opacity-0 absolute"
-            {...register("payment",
+            {...register("paymentMethod",
               { required: true })}
             type="radio"
-            value="debitCard" />
+            value="debit" />
         </label>
-        <label className="flex items-center gap-3 bg-base-button p-4 uppercase rounded-md cursor-pointer focus-within:border-[1px]  focus-within:bg-purple-light focus-within:border-purple-normal w-full hover:animate-bounce "
+        <label className="flex items-center gap-3 bg-base-button py-4 px-2 uppercase rounded-md cursor-pointer focus-within:border-[1px]  focus-within:bg-purple-light focus-within:border-purple-normal w-full hover:animate-bounce "
           htmlFor="money">
           <CreditCard size={16} color="#8047F8" /> Dinheiro
           <input id="money" className="w-[1px] h-[1px] border-0 -m-[1px] opacity-0 absolute"
-            {...register("payment",
+            {...register("paymentMethod",
               { required: true })}
             type="radio"
             value="money" />

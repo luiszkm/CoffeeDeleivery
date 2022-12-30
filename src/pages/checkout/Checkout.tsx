@@ -6,15 +6,36 @@ import { PaymentMethod } from './components/PaymentMethod';
 
 interface ClientAddress {
   id: string;
-  task: string
-  amountMinutes: number
-  startDate: Date
-  interruptedDate?: Date
-  finishedDate?: Date
+  cep: string
+  street: string
+  number: string
+  complement: string
+  district: string
+  city: string
+  state: string
+  createdAt: Date
+  paymentMethod: 'debit' | 'credit' | 'money'
+
 }
 
 export function Checkout() {
-  const clientAddressForm = useForm<ClientAddress>()
+  const id = String(new Date().getSeconds())
+
+  const clientAddressForm = useForm<ClientAddress>({
+    defaultValues: {
+      id: id,
+      cep: '',
+      street: '',
+      number: '',
+      complement: '',
+      district: '',
+      city: '',
+      state: '',
+      paymentMethod: 'money',
+      createdAt: new Date()
+    }
+  })
+
   const { handleSubmit, reset } = clientAddressForm
 
 
@@ -23,18 +44,24 @@ export function Checkout() {
     amountProduct < 1 ? setAmountProduct(1) : setAmountProduct(prevState => prevState + amount)
   }
 
-
+  function handleSubmitForm(data: any) {
+    alert(data)
+    console.log(data);
+    
+    reset()
+  }
   return (
-    <div className="flex flex-col items-center gap-8 md:flex-row">
+    <div className="flex flex-col items-center w-full gap-8 md:flex-row">
       <section>
         <h2 className="text-lg font-bold mb-4">Complete seu pedido</h2>
         <form action=""
-        className="flex flex-col items-center gap-3 w-full max-w-[640px]"
+          className="flex flex-col items-center gap-3 w-full max-w-[640px]"
         >
-          <FormProvider {...clientAddressForm}>
+          <FormProvider  {...clientAddressForm}>
             <PurchaseForm />
             <PaymentMethod />
           </FormProvider>
+
         </form>
       </section>
       <section>
@@ -64,7 +91,11 @@ export function Checkout() {
             </div>
           </div>
 
-          <button className='w-full p-3 uppercase flex items-center justify-center bg-yellow-normal text-wite text-sm font-bold rounded-md hover:bg-yellow-dark hover:animate-bounce'>confirmar pedido</button>
+          <button className='w-full p-3 uppercase flex items-center justify-center bg-yellow-normal text-wite text-sm font-bold rounded-md hover:bg-yellow-dark hover:animate-bounce'
+            type='submit'
+            onClick={ handleSubmit(handleSubmitForm)}
+          >confirmar pedido
+          </button>
         </div>
       </section>
     </div>
