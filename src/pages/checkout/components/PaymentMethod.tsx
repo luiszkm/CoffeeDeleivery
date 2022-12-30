@@ -2,8 +2,10 @@ import { CreditCard, CurrencyDollar } from "phosphor-react";
 import { useFormContext } from "react-hook-form";
 
 export function PaymentMethod() {
-  const { register } = useFormContext()
+  const { register,formState: { errors } } = useFormContext()
+  const isError = Object.entries(errors)
 
+  
   return (
     <div className="w-full p-10 bg-base-card rounded-md flex flex-col gap-8 ">
       <div className="flex flex-col items-start gap-3">
@@ -22,7 +24,7 @@ export function PaymentMethod() {
           <CreditCard size={16} color="#8047F8" /> Cartão de crédito
           <input className="w-[1px] h-[1px] border-0 -m-[1px] opacity-0 absolute"
             id="creditCard"
-            {...register("paymentMethod",
+            {...register("products.paymentMethod",
               { required: true })}
             type="radio"
             value="credit" />
@@ -32,7 +34,7 @@ export function PaymentMethod() {
           <CreditCard size={16} color="#8047F8" /> Cartão de débito
 
           <input id="debitCard" className="w-[1px] h-[1px] border-0 -m-[1px] opacity-0 absolute"
-            {...register("paymentMethod",
+            {...register("products.paymentMethod",
               { required: true })}
             type="radio"
             value="debit" />
@@ -41,12 +43,15 @@ export function PaymentMethod() {
           htmlFor="money">
           <CreditCard size={16} color="#8047F8" /> Dinheiro
           <input id="money" className="w-[1px] h-[1px] border-0 -m-[1px] opacity-0 absolute"
-            {...register("paymentMethod",
+            {...register("products.paymentMethod",
               { required: true })}
             type="radio"
             value="money" />
         </label>
       </div>
+      
+      {isError.length > 0 ?
+        <p className="text-[#ff0000] text-2xs font-bold">Por favor, preencha Todos os Campos</p> : ''}
     </div>
   )
 }

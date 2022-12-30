@@ -4,6 +4,20 @@ import { PurchaseForm } from './components/PurchaseForm'
 import { useForm, FormProvider } from 'react-hook-form'
 import { PaymentMethod } from './components/PaymentMethod';
 
+
+type ProductsPurchases = {
+  id: string
+  name: string
+  amount: string
+  price: string
+
+}
+interface ProductsInformationProps {
+  totalPrice: string
+  paymentMethod: 'debit' | 'credit' | 'money'
+  products: ProductsPurchases[]
+}
+
 interface ClientAddress {
   id: string;
   cep: string
@@ -14,40 +28,45 @@ interface ClientAddress {
   city: string
   state: string
   createdAt: Date
-  paymentMethod: 'debit' | 'credit' | 'money'
+}
 
+interface PurchaseInformationProps {
+  address: ClientAddress
+  products: ProductsInformationProps
 }
 
 export function Checkout() {
   const id = String(new Date().getSeconds())
 
-  const clientAddressForm = useForm<ClientAddress>({
+  const clientAddressForm = useForm<PurchaseInformationProps>({
     defaultValues: {
-      id: id,
-      cep: '',
-      street: '',
-      number: '',
-      complement: '',
-      district: '',
-      city: '',
-      state: '',
-      paymentMethod: 'money',
-      createdAt: new Date()
+      address: {
+        id: id,
+        cep: '',
+        street: '',
+        number: '',
+        complement: '',
+        district: '',
+        city: '',
+        state: '',
+        createdAt: new Date()
+      }
     }
   })
 
-  const { handleSubmit, reset } = clientAddressForm
+  const { handleSubmit, reset, formState: { errors } } = clientAddressForm
 
-
+  const isError = Object.entries(errors);
+  console.log(isError);
+  
   const [amountProduct, setAmountProduct] = useState(1)
   function handleAmountProduct(amount: number) {
     amountProduct < 1 ? setAmountProduct(1) : setAmountProduct(prevState => prevState + amount)
   }
 
-  function handleSubmitForm(data: any) {
-    alert(data)
+  function handleSubmitForm(data: PurchaseInformationProps) {
     console.log(data);
-    
+    alert('ok')
     reset()
   }
   return (
@@ -91,9 +110,11 @@ export function Checkout() {
             </div>
           </div>
 
-          <button className='w-full p-3 uppercase flex items-center justify-center bg-yellow-normal text-wite text-sm font-bold rounded-md hover:bg-yellow-dark hover:animate-bounce'
+          <button className='w-full p-3 uppercase flex items-center justify-center bg-yellow-normal text-wite text-sm font-bold rounded-md hover:bg-yellow-dark hover:animate-bounce 
+           disabled:opacity-60 disabled:bg-yellow-dark disabled:hover:animate-none disabled:cursor-not-allowed'
             type='submit'
-            onClick={ handleSubmit(handleSubmitForm)}
+            onClick={handleSubmit(handleSubmitForm)}
+            disabled={isError.length > 0}
           >confirmar pedido
           </button>
         </div>

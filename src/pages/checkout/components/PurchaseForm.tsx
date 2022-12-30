@@ -3,7 +3,10 @@ import { Input } from "../../../components/Input";
 import { MapPinLine } from "phosphor-react";
 
 export function PurchaseForm() {
-  const { register } = useFormContext()
+  const { formState: { errors } } = useFormContext()
+  const isError = Object.entries(errors)
+
+  
   return (
     <div className="flex items-start flex-col gap-4 bg-base-card rounded-md p-10 w-full max-w-[640px]">
       <div className="flex flex-col ">
@@ -31,7 +34,8 @@ export function PurchaseForm() {
         <Input placeholder="UF" id="state" secondary />
       </div>
 
-
+      {isError.length > 0 ?
+        <p className="text-[#ff0000] text-2xs font-bold">Por favor, preencha Todos os Campos</p> : ''}
     </div>
   )
 
