@@ -4,20 +4,21 @@ import { useShopCar } from '../hooks/useShopCar'
 
 interface PurchaseButtonProps {
   amountProduct: number
+  price: number
   changeAmountProduct: (params:number) => void
   addProduct: () => void
 }
 
 
-export function PurchaseButton({amountProduct, changeAmountProduct, addProduct}:PurchaseButtonProps) {
+export function PurchaseButton({amountProduct,price, changeAmountProduct, addProduct}:PurchaseButtonProps) {
 
   const isMinusOne = amountProduct == 1
-
-
+  const currentPRice = Number(price /100)
+  const priceBrL = currentPRice.toLocaleString('pt-br', {minimumFractionDigits: 2})
   return (
     <div>
       <span className="text-2xl text-base-text font-bold font-mono ">
-        <small className="text-sm font-sans">R$</small> 9.99
+        <small className="text-sm font-sans">R$</small> {priceBrL}
       </span>
       <div className="flex items-center gap-2">
         <div className="bg-base-button w-[72px] rounded-md gap-1 flex items-center p-2 justify-between text-base-title ">

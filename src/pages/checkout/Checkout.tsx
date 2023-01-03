@@ -36,6 +36,9 @@ interface PurchaseInformationProps {
 }
 
 export function Checkout() {
+  const [totalPrice, setTotalPrice] = useState()
+  const [totalProducts, setTotalProducts] = useState<ProductsPurchases[]>([])
+
   const id = String(new Date().getSeconds())
 
   const clientAddressForm = useForm<PurchaseInformationProps>({
@@ -65,7 +68,7 @@ export function Checkout() {
   }
 
   function handleSubmitForm(data: PurchaseInformationProps) {
-    console.log(data);
+
     alert('ok')
     reset()
   }
@@ -89,7 +92,8 @@ export function Checkout() {
         <div className='bg-base-card rounded-tr-[36px] rounded-bl-[36px] rounded-md flex flex-col items-center gap-6 p-10 max-w-md'>
           <TabCard
             amountProduct={amountProduct}
-            changeAmountProduct={handleAmountProduct} />
+            changeAmountProduct={handleAmountProduct}
+             />
 
           <TabCard
             amountProduct={amountProduct}
@@ -106,7 +110,9 @@ export function Checkout() {
             </div>
             <div className='flex items-center w-full justify-between text-base-title text-xl'>
               <strong className=''>Total</strong>
-              <strong className=''>R$ 36,33</strong>
+              <strong className=''
+              
+              >R$ 36,33</strong>
             </div>
           </div>
 

@@ -1,17 +1,22 @@
 import { PurchaseButton } from './PurchaseButton'
 import { useState } from 'react'
 
-import coffee from '../assets/coffee.jpg'
 import { useShopCar } from '../hooks/useShopCar'
-interface Product {
-  id: string
-  name: string
-  amount: number
-  price: number
+
+type Product = {
+  data: {
+    id: string
+    image: string
+    name: string
+    price: number
+    description: string
+    type: string[]
+  }
 }
 
 
-export function Card() {
+export function Card({data}: Product) {
+
   const { handleAddProductInShopCar } = useShopCar()
 
   const [amountProduct, setAmountProduct] = useState(1)
@@ -20,38 +25,43 @@ export function Card() {
     amountProduct < 1 ? setAmountProduct(1) : setAmountProduct(prevState => prevState + amount)
   }
 
-
   function AddProductInShopCar() {
 
-    const productAdd: Product = {
-      id: '1',
+    const productAdd = {
+      id: data.id,
       amount: amountProduct,
-      name: 'coffee',
-      price: 99999
+      name: data.name,
+      price: data.price,
     }
     handleAddProductInShopCar(productAdd)
   }
   return (
-    <div className="w-64 h-80 flex pb-6 relative mt-[10px] items-center justify-between flex-col bg-base-card rounded-tr-[36px] rounded-bl-[36px] rounded-md ">
+    <div className="w-64  flex pb-5 relative mt-[10px] items-center justify-between flex-col bg-base-card rounded-tr-[36px] rounded-bl-[36px] rounded-md ">
       <div className="relative -top-5 flex items-center flex-col gap-3">
-        <img src={coffee} alt="" />
-        <span className=" px-1 py-2 rounded-[10px] uppercase font-bold bg-yellow-light text-yellow-dark">
-          Tradicional
-        </span>
+        <img src={data.image} alt={data.name}
+        className="w-[120px] h-[120px] object-cover" />
+       <div className="flex items-center gap-3">
+       {data.type.map(item=>(
+            <span className=" px-1 py-2 rounded-[10px] uppercase font-bold bg-yellow-light text-yellow-dark">
+              {item}
+            </span>
+          ))}
+       
+       </div>
       </div>
       <div>
-        <h3 className="font-mono text-xl font-bold text-base-subTitle">
-          Expresso
+        <h3 className="font-mono text-xl font-bold text-center text-base-subTitle">
+          {data.name}
         </h3>
-        <p className="text-sm text-base-label">
-          O tradicional café feito com água quente e grãos moídos
+        <p className="text-sm text-base-label text-center">
+          {data.description}
         </p>
       </div>
-      <PurchaseButton
-      changeAmountProduct={handleAmountProduct}
-      addProduct={AddProductInShopCar}
-      amountProduct={amountProduct}
-       />
+      <PurchaseButton price={data.price}
+        changeAmountProduct={handleAmountProduct}
+        addProduct={AddProductInShopCar}
+        amountProduct={amountProduct}
+      />
     </div>
   )
 }
