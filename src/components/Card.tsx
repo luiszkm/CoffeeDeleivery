@@ -10,6 +10,7 @@ type Product = {
     name: string
     price: number
     description: string
+    amount: number
     type: string[]
   }
 }
@@ -32,6 +33,8 @@ export function Card({data}: Product) {
       amount: amountProduct,
       name: data.name,
       price: data.price,
+      imageUrl: data.image,
+
     }
     handleAddProductInShopCar(productAdd)
   }
@@ -58,6 +61,7 @@ export function Card({data}: Product) {
         </p>
       </div>
       <PurchaseButton price={data.price}
+        key={String(data.id)}
         changeAmountProduct={handleAmountProduct}
         addProduct={AddProductInShopCar}
         amountProduct={amountProduct}

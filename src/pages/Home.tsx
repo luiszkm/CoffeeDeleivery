@@ -2,15 +2,7 @@ import { Card } from '../components/Card'
 import { Hero } from '../components/Hero'
 
 import AllCoffee from '../api.json'
-interface coffeeProps {
-  id: string
- image: string
- name: string
- price: number
- description: string
- types: string[]
 
-}
 
 
 export function Home() {
@@ -24,7 +16,8 @@ export function Home() {
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 md:mt-20 lg:grid-cols-4 ">
           {
             AllCoffee.map(item=>(
-              <Card  data={item} />
+              <Card key={String(item.id)}
+                data={item} />
             ))
           }
       

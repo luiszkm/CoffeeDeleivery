@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { TabCard } from '../../components/TabCard'
 import { PurchaseForm } from './components/PurchaseForm'
 import { useForm, FormProvider } from 'react-hook-form'
 import { PaymentMethod } from './components/PaymentMethod';
+import { useShopCar } from '../../hooks/useShopCar';
 
 
 type ProductsPurchases = {
@@ -36,9 +37,10 @@ interface PurchaseInformationProps {
 }
 
 export function Checkout() {
-  const [totalPrice, setTotalPrice] = useState()
-  const [totalProducts, setTotalProducts] = useState<ProductsPurchases[]>([])
+  const { products, handleRemoveProductInShopCar, loadProducts  } = useShopCar()
 
+  
+  
   const id = String(new Date().getSeconds())
 
   const clientAddressForm = useForm<PurchaseInformationProps>({
@@ -57,21 +59,42 @@ export function Checkout() {
     }
   })
 
+
+  const totalPriceProducts = products.reduce((total, price) => total + Number(price.amount * price.price), 0)
+  const currentPrice = Number((totalPriceProducts) / 100)
+
+  let frete = totalPriceProducts > 5000 ? 0 : totalPriceProducts > 3000 ? 5 : 10
+  const freteBrl = frete.toLocaleString('pt-br', { minimumFractionDigits: 2 })
+  console.log(frete);
+  
+
+
+  const totalPrice = Number(currentPrice + frete)
+  const totalPriceBrl = totalPrice.toLocaleString('pt-br', { minimumFractionDigits: 2 })
+
   const { handleSubmit, reset, formState: { errors } } = clientAddressForm
 
   const isError = Object.entries(errors);
-  console.log(isError);
-  
-  const [amountProduct, setAmountProduct] = useState(1)
-  function handleAmountProduct(amount: number) {
-    amountProduct < 1 ? setAmountProduct(1) : setAmountProduct(prevState => prevState + amount)
-  }
+
 
   function handleSubmitForm(data: PurchaseInformationProps) {
 
     alert('ok')
     reset()
   }
+  let test 
+
+
+  useEffect(() => {
+   const loadPrice = () => {
+    test = products.reduce((total, price) => total + Number(price.amount * price.price), 0)
+    
+   }
+
+   loadPrice()
+    
+    
+  },[loadProducts])
   return (
     <div className="flex flex-col items-center w-full gap-8 md:flex-row">
       <section>
@@ -86,33 +109,36 @@ export function Checkout() {
 
         </form>
       </section>
-      <section>
+      <section className='w-full max-w-md'>
         <h2 className="text-lg font-bold mb-4">Cafés selecionados</h2>
 
         <div className='bg-base-card rounded-tr-[36px] rounded-bl-[36px] rounded-md flex flex-col items-center gap-6 p-10 max-w-md'>
-          <TabCard
-            amountProduct={amountProduct}
-            changeAmountProduct={handleAmountProduct}
-             />
+          {products && products.map(product => (
+            <TabCard
+              key={String(product.id)}
+              RemoveProduct={() => handleRemoveProductInShopCar(product)}
+              data={product}
 
-          <TabCard
-            amountProduct={amountProduct}
-            changeAmountProduct={handleAmountProduct} />
+            />
+          ))}
+
+
+
 
           <div className='flex items-center flex-col gap-3 w-full'>
             <div className='flex items-center w-full justify-between text-base-text'>
               <span className='text-sm'>Total de Itens</span>
-              <span className='text-md'>R$ 33,33</span>
+              <span className='text-md'>R$ {currentPrice.toLocaleString('pt-br', { minimumFractionDigits: 2 })}</span>
             </div>
             <div className='flex items-center w-full justify-between'>
-              <span className='text-sm'>Entrega</span>
-              <span className='text-md'>R$ 3,00</span>
+              <span className='text-sm'>Entrega</span>{test}
+              <span className='text-md'>{frete === 0 ? "Frete Gratis" :` R$ ${freteBrl}`}</span>
             </div>
             <div className='flex items-center w-full justify-between text-base-title text-xl'>
               <strong className=''>Total</strong>
               <strong className=''
-              
-              >R$ 36,33</strong>
+
+              >R$ {totalPriceBrl}</strong>
             </div>
           </div>
 

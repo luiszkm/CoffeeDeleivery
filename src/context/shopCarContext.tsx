@@ -6,11 +6,15 @@ export interface Product {
   name: string
   amount: number
   price: number
+  imageUrl: string
 }
 
 export interface ShopCarDataProps {
   products: Product[]
-  handleAddProductInShopCar: any
+  loadProducts: number | undefined
+  handleAddProductInShopCar:(params: Product) => void
+  handleRemoveProductInShopCar: (params: Product) => void
+  handleAlternateAmountProduct: any
 }
 interface ShopCarProvider {
   children: ReactNode
@@ -20,17 +24,32 @@ export const shopCarContext = createContext({} as ShopCarDataProps)
 
 export function ShopCarProvider({ children }: ShopCarProvider) {
   const [products, setProducts] = useState<Product[]>([])
-  console.log(products);
+  const [loadProducts, setLoadProducts] = useState(0)
+  
   
   function handleAddProductInShopCar(product:Product){
     setProducts(prevState=> [...prevState, product])
-    console.log("deu certo")
+  }
+  function handleRemoveProductInShopCar(productForDelete:Product){
+    const productsRemoved = products.filter(product=>product.id !== productForDelete.id)
+    setProducts(productsRemoved)
+  }
+
+  function handleAlternateAmountProduct(productForAlter:Product , updateAmount: number ){
+    let productAlter = products.find(productFind => productFind.id === productForAlter.id) || {amount:1, price: 1}
+    productAlter.amount = updateAmount
+
+    setLoadProducts(Number(productAlter.amount * productAlter.price))
+    
   }
   
   return (
     <shopCarContext.Provider value={{
       products,
-      handleAddProductInShopCar
+      loadProducts,
+      handleAddProductInShopCar,
+      handleRemoveProductInShopCar,
+      handleAlternateAmountProduct
     }}>
       {children}
     </shopCarContext.Provider>
