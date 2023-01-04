@@ -5,6 +5,7 @@ import { useForm, FormProvider } from 'react-hook-form'
 import { PaymentMethod } from './components/PaymentMethod';
 import { useShopCar } from '../../hooks/useShopCar';
 import emptyCar from "../../assets/emptyCart.svg"
+import { json, useNavigate } from 'react-router-dom';
 
 type ProductsPurchases = {
   id: string
@@ -37,8 +38,8 @@ interface PurchaseInformationProps {
 }
 
 export function Checkout() {
-  const { products, handleRemoveProductInShopCar, loadProducts } = useShopCar()
-
+  const { products, handleRemoveProductInShopCar, loadProducts , setProducts } = useShopCar()
+  const navigate = useNavigate();
 
 
   const id = String(new Date().getSeconds())
@@ -74,8 +75,11 @@ export function Checkout() {
   const isError = Object.entries(errors);
 
   function handleSubmitForm(data: PurchaseInformationProps) {
-
     alert('ok')
+
+    localStorage.setItem('@ClientAddressCoffee', JSON.stringify(data))
+    navigate('/success')
+    setProducts([])
     reset()
   }
   let test

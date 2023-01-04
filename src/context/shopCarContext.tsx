@@ -12,6 +12,7 @@ export interface Product {
 export interface ShopCarDataProps {
   products: Product[]
   loadProducts: number | undefined
+  setProducts: any
   handleAddProductInShopCar:(params: Product) => void
   handleRemoveProductInShopCar: (params: Product) => void
   handleAlternateAmountProduct: any
@@ -47,6 +48,7 @@ export function ShopCarProvider({ children }: ShopCarProvider) {
     <shopCarContext.Provider value={{
       products,
       loadProducts,
+      setProducts,
       handleAddProductInShopCar,
       handleRemoveProductInShopCar,
       handleAlternateAmountProduct
