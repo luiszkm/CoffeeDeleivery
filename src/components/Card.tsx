@@ -43,9 +43,10 @@ export function Card({data}: Product) {
       <div className="relative -top-5 flex items-center flex-col gap-3">
         <img src={data.image} alt={data.name}
         className="w-[120px] h-[120px] object-cover" />
-       <div className="flex items-center gap-3">
+       <div className="flex items-center gap-3 flex-wrap justify-center">
        {data.type.map(item=>(
-            <span className=" px-1 py-2 rounded-[10px] uppercase font-bold bg-yellow-light text-yellow-dark">
+            <span className=" px-1 py-2 rounded-[10px] uppercase font-bold bg-yellow-light text-yellow-dark"
+            key={item}>
               {item}
             </span>
           ))}
