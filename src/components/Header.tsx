@@ -19,8 +19,9 @@ interface ClientAddressProps{
 
 
 export function Header() {
-  const {address}: ClientAddressProps = JSON.parse(localStorage.getItem('@ClientAddressCoffee') || '')
+  const {address}= JSON.parse(localStorage.getItem('@ClientAddressCoffee') || "{}") 
 
+console.log(address);
 
   return (
     <header className="flex items-center justify-between px-4 py-8">
@@ -33,7 +34,7 @@ export function Header() {
       <div className="flex items-center gap-3">
         <button className="flex items-center gap-1 p-2 rounded-md bg-purple-light text-sm text-purple-dark">
           <MapPin size={22} weight="fill" /> 
-          {`${address.city.toLowerCase()}, ${address.state.toUpperCase()}`}
+          {!address ? "Brasil" : `${address?.city.toLowerCase()}, ${address?.state.toUpperCase()}`}
         </button>
         <NavLink to="/checkout">
           <ShoppingCartButton primary />
