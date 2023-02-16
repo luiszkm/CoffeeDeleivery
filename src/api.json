@@ -36,7 +36,7 @@
     "id": "4",
     "name": "Expresso Gelado",
     "description": "Bebida preparada com café expresso e cubos de gelo",
-    "image": "/src/assets/CoffeeCold.jpg",
+    "image": "/img/CoffeeCold.jpg",
     "amount": 1,
     "price": 1290,
     "type": [

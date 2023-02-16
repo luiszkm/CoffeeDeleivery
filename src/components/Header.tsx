@@ -21,7 +21,6 @@ interface ClientAddressProps{
 export function Header() {
   const {address}= JSON.parse(localStorage.getItem('@ClientAddressCoffee') || "{}") 
 
-console.log(address);
 
   return (
     <header className="flex items-center justify-between px-4 py-8">
