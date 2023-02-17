@@ -3,7 +3,7 @@
     "id": "1",
     "name": "Expresso Tradicional",
     "description": "O tradicional café feito com água quente e grãos moídos",
-    "image": "/img/coffee.jpg",
+    "image": "/img/Coffee.jpg",
     "amount": 1,
     "price": 990,
     "type": [

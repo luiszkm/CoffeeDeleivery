@@ -41,7 +41,7 @@ export function Hero() {
         </div>
       </div>
       <img
-        className="max-w-sm mx-auto my-0"
+        className="w-full max-w-[300px] sm:max-w-sm mx-auto my-0"
         src="/img/Imagem.png"
         alt="copo grande de café com um funo amarelo"
       />
